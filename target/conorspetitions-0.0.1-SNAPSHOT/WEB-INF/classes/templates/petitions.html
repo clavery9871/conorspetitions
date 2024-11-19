@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <h1>All Partitions</h1>
+    <ul>
+        <li th:each="petition : ${petitions}">
+            <a th:href="@{'/petition/' + ${petition.id}}" th:text="${petition.title}"}"</a>
+        </li>
+    </ul>
+    <a href="/create-petition">Create a new petition</a>
+</body>
+</html>

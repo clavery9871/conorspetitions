@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <h1>All Conor's Petitions</h1>
+<!--    Display a list of all petitions-->
+    <ul>
+        <li th:each="petition : ${petitions}">
+<!--            Have each petition link to its own specific page (i.e. /petition/{id})-->
+            <a th:href="@{'/petition/' + ${petition.id}}" th:text="${petition.title}"></a>
+        </li>
+    </ul>
+<!--    Provide a link to create a new petition-->
+    <a href="/create">Create a new petition</a><br>
+    <a href="/query">Query a petition</a>
+</body>
+</html>
