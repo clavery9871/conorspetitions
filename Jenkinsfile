@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    options {
-        timeout(time: 5, unit: 'MINUTES') // Setting a hard timeout for the pipeline
-    }
     stages {
         stage('Download Dependencies') {
             steps {
@@ -19,8 +16,14 @@ pipeline {
         }
         stage('Build') {
             steps {
-                timeout(time: 2, unit: 'MINUTES') { // Timeout specifically for this stage
-                    sh 'mvn clean install'
+                script {
+                    try {
+                        sh 'mvn clean install'
+                    } catch (Exception e) {
+                        echo "Maven build failed: ${e.getMessage()}"
+                        currentBuild.result = 'FAILURE'
+                        throw e
+                    }
                 }
             }
         }
