@@ -4,6 +4,14 @@ pipeline {
         timeout(time: 5, unit: 'MINUTES') // Setting a hard timeout for the pipeline
     }
     stages {
+        stage('Download Dependencies') {
+            steps {
+                script {
+                    // Run Maven offline dependencies goal to cache them in Jenkins
+                    sh 'mvn dependency:go-offline'
+                }
+            }
+        }
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/clavery9871/conorspetitions'
