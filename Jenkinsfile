@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    option {
+        timeout(time: 5, unit: 'MINUTES') // Setting a hard timeout for the pipeline
+    }
     stages {
         stage('Checkout Code') {
             steps {
@@ -8,7 +11,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                timeout(time: 2, unit: 'MINUTES') { // Timeout specifically for this stage
+                    sh 'mvn clean install'
+                }
             }
         }
         stage('Test') {
