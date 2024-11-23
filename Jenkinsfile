@@ -43,15 +43,10 @@ pipeline {
             }
         }
         stage('Deploy') {
-               steps {
-                   script {
-                       // Deploy WAR to Tomcat using curl (Tomcat Manager)
-                       sh """
-                       curl -u conor:conor_123 -T target/conorspetitions.war \
-                       http://localhost:9090/manager/deploy?path=/conorspetitions&update=true
-                       """
-                   }
-               }
+            steps {
+                input message: 'Deploy?', ok: 'Deploy'
+                sh 'scp target/conorspetitions.war conor@localhost:/opt/tomcat/webapps/'
+            }
         }
     }
 }
