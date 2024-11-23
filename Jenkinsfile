@@ -42,7 +42,6 @@ pipeline {
                     // Directly copy the WAR file to Tomcat's webapps directory
                     sh """
                         cp target/conorspetitions.war /opt/tomcat/webapps/
-                        sudo systemctl restart tomcat
                     """
                 }
             }
