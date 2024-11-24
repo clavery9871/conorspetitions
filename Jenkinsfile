@@ -41,7 +41,7 @@ pipeline {
                 script {
                     // Directly copy the WAR file to Tomcat's webapps directory
                     sh """
-                        cp target/conorspetitions.war /opt/tomcat/webapps/
+                        sudo cp target/conorspetitions.war /opt/tomcat/webapps/
                         sudo chown conor:conor /opt/tomcat/webapps/conorspetitions.war
                         sudo chmod 755 /opt/tomcat/webapps/conorspetitions.war
                     """
