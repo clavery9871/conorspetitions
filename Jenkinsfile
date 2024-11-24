@@ -54,8 +54,9 @@ pipeline {
                 script {
                     // Restart Tomcat using systemctl
                     sh """
-                        sudo systemctl stop tomcat
-                        sudo systemctl start tomcat
+                        sudo /opt/tomcat/bin/shutdown.sh
+                        sleep 5
+                        sudo /opt/tomcat/bin/startup.sh
                     """
                 }
             }
