@@ -48,5 +48,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Restart Tomcat') {
+            steps {
+                script {
+                    // Restart Tomcat using systemctl
+                    sh """
+                        sudo systemctl stop tomcat
+                        sudo systemctl start tomcat
+                    """
+                }
+            }
+        }
     }
 }
